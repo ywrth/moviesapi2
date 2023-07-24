@@ -1,0 +1,58 @@
+/* Styles for the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  th,
+  td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  /* Styles for the headings */
+  h2 {
+    margin-top: 40px;
+    text-align: center;
+  }
+  
+  /* Styles for the code block */
+  pre {
+    margin: 0;
+    background-color: #f2f2f2;
+    padding: 10px;
+  }
+  
+  /* Additional styles for better readability */
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+  }
+  
+  h1 {
+    color: #333;
+  }
+  
+  p {
+    margin-bottom: 20px;
+  }
+  
+  /* Example styles for links (you can customize as needed) */
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+
+th {
+    text-align: center;
+}
