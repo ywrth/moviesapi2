@@ -115,7 +115,7 @@ let topMovies = [
   {
     Title: 'Se7en',
     Description:
-      "Set in an unnamed, crime-ridden city, Seven's plot follows disenchanted, near-retirement detective William Somerset (Freeman) and his newly transferred partner David Mills (Pitt) as they attempt to stop a serial killer before he can complete a series of murders based on the seven deadly sins.",
+      'Set in an unnamed, crime-ridden city, plot follows disenchanted, near-retirement detective William Somerset (Freeman) and his newly transferred partner David Mills (Pitt) as they attempt to stop a serial killer before he can complete a series of murders based on the seven deadly sins.',
     Genre: {
       Name: 'Psychological thriller',
       Description:
