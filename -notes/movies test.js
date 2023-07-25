@@ -197,27 +197,27 @@ var movie1 =
 
   db.movies.insertOne(movie9)
 
-  var movie10 = 
+  var movie11 = 
   {
-    Title: 'Into the wild',
+    Title: 'Notting Hill',
     Description:
-      'Into the Wild tells the true story of the journey of 24-year-old Christopher McCandless into Alaska\'s Denali National Park and Preserve, where he starved to death in an abandoned bus after spending four months foraging and hunting game.',
+      'William, a British bookseller, meets and falls in love with Anna, a high-profile American actress. However, their relationship goes through many problems due to their different social statuses',
     Genre: {
-      Name: 'Drama',
+      Name: 'Romantic Comedy',
       Description:
-        'In film and television, drama is a category or genre of narrative fiction (or semi-fiction) intended to be more serious than humorous in tone',
+        'Romantic comedy is a subgenre of comedy and slice of life fiction, focusing on lighthearted, humorous plot lines centered on romantic ideas, such as how true love is able to surmount most obstacles.',
     },
     Director: {
-      Name: 'Sean Penn',
-      Bio: 'Sean Justin Penn is an American actor and film director. He has won Academy Awards for his roles in the mystery drama Mystic River and the biopic Milk.',
-      Birth: '1960.0'
+      Name: 'Roger Michell',
+      Bio: 'Roger Michell was a South African-born British theatre, television and film director. He was best known for directing films such as Notting Hill and Venus, as well as the 1995 made-for-television film Persuasion.',
+      Birth: '1956.0'
     },
     ImageURL:
-      'https://static.kino.de/a6/23/89/8dfdcd159012f2a807948755f0_A2EzOGQxMGY4OTdm_imago0098073465h.jpg',
+      'https://media.gq.com/photos/61f3057416792ff88dd157f7/3:2/w_3006,h_2004,c_limit/MSDNOHI_EC034.jpg',
     Featured: false
   }
 
-  db.movies.insertOne(movie10)
+  db.movies.insertOne(movie11)
 
 
   ///////////////////////////
