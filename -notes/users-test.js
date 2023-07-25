@@ -1,10 +1,13 @@
 var user1 = {
-    Name: Maria Suarez
+    Name: "Maria Suarez",
     Username: "m.suarez",
     Password: "test123",
     Email:"m.suarez@gmail.com",
     Birthday: "09/10/1990",
-    FavoriteMovies: [ movie10, movie2, movie1 ]
+    FavoriteMovies: [ 
+      ObjectId("64be3a0ef7ee369bfd2b4afb"),
+        ObjectId("64be3a04f7ee369bfd2b4afa"),
+        ObjectId("64be39f0f7ee369bfd2b4af8")]
   }
   
   db.users.insertOne(user1)
@@ -67,7 +70,7 @@ db.users.updateOne(
   }
 );
 
-var user4 = {
+var user5 = {
     Name: "Johanne Larsen",
     Username: "jbl.heart",
     Password: "ohiboka1",
@@ -82,7 +85,7 @@ var user4 = {
 
   db.users.insertOne(user5);
 
-  var user5 = {
+  var user2 = {
     Name: "Angelo Priest",
     Username: "aprie",
     Password: "logmein1",
@@ -95,7 +98,7 @@ var user4 = {
   };
   
 
-  db.users.insertOne(user5);
+  db.users.insertOne(user2);
 
 
 
