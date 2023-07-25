@@ -1,3 +1,4 @@
 node_modules/
 # log.txt 
 -notes/movies test.js
+-notes/users-test.js
