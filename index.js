@@ -1,9 +1,16 @@
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+const Movies = Models.Movie;
+const Users = Models.User;
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
-;(bodyParser = require('body-parser')), (uuid = require('uuid'))
+  ; (bodyParser = require('body-parser')), (uuid = require('uuid'))
 
 app.use(bodyParser.json())
+
+mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/users', { useNewUrlParser: true, useUnifiedTopology: true });
 
 let users = [
   {
