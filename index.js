@@ -247,6 +247,33 @@ app.post('/users', async (req, res) => {
     });
 });
 
+// GET ALL USERS
+
+app.get('/users', async (req, res) => {
+  await Users.find()
+    .then((users) => {
+      res.status(201).json(users);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
+
+// GET A USER BY USERNAME
+
+app.get('/users/:Username', async (req, res) => {
+  await Users.findOne({ Username: req.params.Username })
+    .then((user) => {
+      res.json(user);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
+
+
 // UPDATE user
 app.put('/users/:id', (req, res) => {
   const { id } = req.params
@@ -308,6 +335,8 @@ app.delete('/users/:id', (req, res) => {
   }
 })
 
+
+
 //READ the list of all movies to the users (CRUD)
 app.get('/movies', (req, res) => {
   res.status(200).json(topMovies)
@@ -355,14 +384,14 @@ app.get('/movies/directors/:directorName', (req, res) => {
 
 const errorHandler = (err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send('Houston, we have a problem!');
+  res.status(err.statusCode || 500).json({ error: err.message || 'Houston, we have a problem!' });
 };
 
 app.use(errorHandler);
 
 app.get('/error', (req, res) => {
-  throw new Error('Testing error handling')
-})
+  next(new Error('Testing error handling'));
+});
 
 // middleware timestamp/morgan
 let requestTime = (req, res, next) => {
