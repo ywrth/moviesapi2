@@ -42,6 +42,19 @@ db.users.updateOne(
   }
 );
 
+var user2 = {
+  Name: "Angelo Priest",
+  Username: "m.suarez",
+  Password: "test123",
+  Email:"m.suarez@gmail.com",
+  Birthday: "09/10/1990",
+  FavoriteMovies: [ 
+    ObjectId("64be3a0ef7ee369bfd2b4afb"),
+      ObjectId("64be3a04f7ee369bfd2b4afa"),
+      ObjectId("64be39f0f7ee369bfd2b4af8")]
+}
+
+db.users.insertOne(user2)
 
 var user3 = {
     Name: "Margaret Cho",
@@ -234,28 +247,74 @@ db.users.updateOne(
       ]
     },
     {
-      _id: ObjectId("64be5f61f7ee369bfd2b4b02"),
-      Name: 'Marco Deutschland',
-      Username: 'm-d-m',
-      Password: 'passssss1111',
-      Email: 'marky-mark@gmail.com',
-      Birthday: '1980-07-07',
-      FavoriteMovies: [
-        ObjectId("64be3a0ef7ee369bfd2b4afb"),
-        ObjectId("64be39e8f7ee369bfd2b4af7")
-      ]
-    },
-    {
-      _id: ObjectId("64be5f62f7ee369bfd2b4b03"),
-      Name: 'Angelo Priest',
-      Username: 'aprie',
-      Password: 'logmein1',
-      Email: 'angel.p@gmail.com',
-      Birthday: '1999-01-12',
-      FavoriteMovies: [
-        ObjectId("64be3a0ef7ee369bfd2b4afb"),
-        ObjectId("64be39f0f7ee369bfd2b4af8")
-      ]
-    }
-  ]
+
+    
+
+     // _id: ObjectId("64c348177d75f984a94efc8c")
+
+  var user2 = {
+    Name: "Angelo Priest",
+    Username: "aprie",
+    Password: "logmein1",
+    Email:"angel.p@gmail.com",
+    Birthday: "1999-01-12",
+    FavoriteMovies: [ 
+      ObjectId("64be3a0ef7ee369bfd2b4afb"),
+      ObjectId("64be39f0f7ee369bfd2b4af8")
+    ]
+  }
   
+  db.users.insertOne(user2)
+
+
+
+  // _id: ObjectId("64c349d27d75f984a94efc8d")
+
+  var user3 = {
+    Name: "Marco Deutschland",
+    Username: "m-d-m",
+    Password: "passssss1111",
+    Email: "angel.p@gmail.com",
+    Birthday: "1999-01-12",
+    FavoriteMovies: [
+      ObjectId("64be3a0ef7ee369bfd2b4afb"),
+      ObjectId("64be39f0f7ee369bfd2b4af8")
+    ]
+  };
+  
+  db.users.insertOne(user3);
+  
+    // _id: ObjectId("64c34a3d7d75f984a94efc8e")
+
+    var user4 = {
+      Name: 'Johanne Larsen',
+      Username: 'jbl.heart',
+      Password: 'ohiboka1',
+      Email: 'jbl@gmail.com',
+      Birthday: '1991-07-09',
+      FavoriteMovies: [
+        ObjectId("64be39f0f7ee369bfd2b4af8"),
+        ObjectId("64be39f9f7ee369bfd2b4af9")
+      ]
+    };
+    
+    db.users.insertOne(user4);
+
+
+  // _id: ObjectId("64c34a9d7d75f984a94efc8f")
+
+        var user5 = {
+          Name: 'John Poe',
+          Username: 'john.dope',
+          Password: 'test456',
+          Email: 'john.poe@gmail.com',
+          Birthday: '1989-05-12',
+          FavoriteMovies: [
+            ObjectId("64be3903f7ee369bfd2b4af2"),
+            ObjectId("64be39aef7ee369bfd2b4af3"),
+            ObjectId("64be39e8f7ee369bfd2b4af7")
+          ]
+        };
+        
+        db.users.insertOne(user5);
+    

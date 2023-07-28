@@ -2,15 +2,14 @@ const mongoose = require('mongoose');
 const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
-const express = require('express')
+const express = require('express');
 const app = express()
-const morgan = require('morgan')
-  ; (bodyParser = require('body-parser')), (uuid = require('uuid'))
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const uuid = require('uuid');
+app.use(bodyParser.json());
 
-app.use(bodyParser.json())
-
-mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect('mongodb://localhost:27017/users', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true })
 
 let users = [
   {
@@ -330,10 +329,12 @@ app.get('/movies/directors/:directorName', (req, res) => {
 
 // error-handling
 
-app.use((err, req, res, next) => {
-  console.error(err.stack)
-  res.status(500).send('Houston, we have a problem!')
-})
+const errorHandler = (err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Houston, we have a problem!');
+};
+
+app.use(errorHandler);
 
 app.get('/error', (req, res) => {
   throw new Error('Testing error handling')
