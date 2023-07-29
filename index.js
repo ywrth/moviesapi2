@@ -1,14 +1,13 @@
-const mongoose = require('mongoose');
 const Models = require('./models.js');
 const Movie = Models.Movie;
 const Users = Models.User;
 const express = require('express');
-app.use(express.json());
+const app = express();
 const morgan = require('morgan');
 const uuid = require('uuid');
-app.use(bodyParser.json());
+app.use(express.json());
 
-mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true });
 
 let users = [
   {
