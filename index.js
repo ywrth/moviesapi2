@@ -7,6 +7,9 @@ const app = express();
 const morgan = require('morgan');
 const uuid = require('uuid');
 app.use(express.json());
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
 
 mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true });
 
