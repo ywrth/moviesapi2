@@ -31,20 +31,20 @@
         <!-- request all movies -->
         <tr>
             <td>GET</td>
-            <td>/movies</td>
+            <td>/api/movies</td>
             <td>GET</td>
             <td>N/A</td>
             <td>N/A</td>
             <td>
                 An array of objects representing all movies. Each object contains the following properties:
-                <!-- Description of response data -->
                 <ul>
-                    <li><code>Title</code>: String (movie title)</li>
-                    <li><code>Description</code>: String (movie description)</li>
-                    <li><code>Genre</code>: Object (genre information)</li>
-                    <li><code>Director</code>: Object (director information)</li>
-                    <li><code>ImageURL</code>: String (URL of the movie image)</li>
-                    <li><code>Featured</code>: Boolean (whether the movie is featured or not)</li>
+                    <li><code>_id</code>: String (movie's unique identifier)</li>
+                    <li><code>title</code>: String (movie title)</li>
+                    <li><code>description</code>: String (movie description)</li>
+                    <li><code>genre</code>: String (genre name)</li>
+                    <li><code>director</code>: String (director name)</li>
+                    <li><code>imageUrl</code>: String (URL of the movie image)</li>
+                    <li><code>featured</code>: Boolean (whether the movie is featured or not)</li>
                 </ul>
             </td>
         </tr>
@@ -52,19 +52,20 @@
         <!-- Info on the movie-->
         <tr>
             <td>GET</td>
-            <td>/movies/{title}</td>
+            <td>/api/movies/{id}</td>
             <td>GET</td>
             <td>N/A</td>
             <td>N/A</td>
             <td>
-                An object representing a movie with the specified title. The object contains the following properties:
+                An object representing a movie with the specified ID. The object contains the following properties:
                 <ul>
-                    <li><code>Title</code>: String (movie title)</li>
-                    <li><code>Description</code>: String (movie description)</li>
-                    <li><code>Genre</code>: Object (genre information)</li>
-                    <li><code>Director</code>: Object (director information)</li>
-                    <li><code>ImageURL</code>: String (URL of the movie image)</li>
-                    <li><code>Featured</code>: Boolean (whether the movie is featured or not)</li>
+                    <li><code>_id</code>: String (movie's unique identifier)</li>
+                    <li><code>title</code>: String (movie title)</li>
+                    <li><code>description</code>: String (movie description)</li>
+                    <li><code>genre</code>: String (genre name)</li>
+                    <li><code>director</code>: String (director name)</li>
+                    <li><code>imageUrl</code>: String (URL of the movie image)</li>
+                    <li><code>featured</code>: Boolean (whether the movie is featured or not)</li>
                 </ul>
             </td>
         </tr>
@@ -72,15 +73,16 @@
         <!-- request genre by name -->
         <tr>
             <td>GET</td>
-            <td>/genres/{genreName}</td>
+            <td>/api/genres/{name}</td>
             <td>GET</td>
             <td>N/A</td>
             <td>N/A</td>
             <td>
                 An object representing the genre with the specified name. The object contains the following properties:
                 <ul>
-                    <li><code>Name</code>: String (genre name)</li>
-                    <li><code>Description</code>: String (genre description)</li>
+                    <li><code>_id</code>: String (genre's unique identifier)</li>
+                    <li><code>name</code>: String (genre name)</li>
+                    <li><code>description</code>: String (genre description)</li>
                 </ul>
             </td>
         </tr>
@@ -88,16 +90,17 @@
         <!-- request director by name -->
         <tr>
             <td>GET</td>
-            <td>/directors/{directorName}</td>
+            <td>/api/directors/{name}</td>
             <td>GET</td>
             <td>N/A</td>
             <td>N/A</td>
             <td>
                 An object representing the director with the specified name. The object contains the following properties:
                 <ul>
-                    <li><code>Name</code>: String (director name)</li>
-                    <li><code>Bio</code>: String (director biography)</li>
-                    <li><code>Birth</code>: Number (director birth year)</li>
+                    <li><code>_id</code>: String (director's unique identifier)</li>
+                    <li><code>name</code>: String (director name)</li>
+                    <li><code>bio</code>: String (director biography)</li>
+                    <li><code>birthYear</code>: Number (director birth year)</li>
                 </ul>
             </td>
         </tr>
@@ -105,24 +108,23 @@
         <!-- Register new user -->
         <tr>
             <td>POST</td>
-            <td>/users</td>
+            <td>/api/users</td>
             <td>POST</td>
             <td>N/A</td>
             <td>
                 An object representing the user to be registered. The object should contain the following properties:
                 <ul>
                     <li><code>name</code>: String (user's name)</li>
-                    <li><code>favoriteMovies</code>: Array (user's favorite movies)</li>
-                    <li><code>id</code>: String (user's unique identifier)</li>
+                    <li><code>favoriteMovies</code>: Array (user's favorite movies - an array of movie IDs)</li>
                 </ul>
             </td>
             <td>
                 The registered user object:
                 <pre>
             {
+                "_id": "user_id_here",
                 "name": "Mary",
-                "favoriteMovies": ["Nomadland"],
-                "id": "79045c67-62b9-4fe9-a63f-76a8a87d29f0"
+                "favoriteMovies": ["movie_id_1", "movie_id_2"],
             }
         </pre>
             </td>
@@ -131,15 +133,14 @@
         <!-- Update user info -->
         <tr>
             <td>PUT</td>
-            <td>/users/{username}</td>
+            <td>/api/users/{id}</td>
             <td>PUT</td>
             <td>N/A</td>
             <td>
                 An object representing the updated user info. The object should contain the following properties:
                 <ul>
                     <li><code>name</code>: String (updated user's name)</li>
-                    <li><code>favoriteMovies</code>: Array (updated user's favorite movies)</li>
-                    <li><code>id</code>: String (user's unique identifier)</li>
+                    <li><code>favoriteMovies</code>: Array (updated user's favorite movies - an array of movie IDs)</li>
                 </ul>
             </td>
             <!-- Added the "Response Data" column -->
@@ -148,9 +149,9 @@
                 <!-- Added the example of response data -->
                 <pre>
             {
+                "_id": "user_id_here",
                 "name": "Kim updated name",
-                "favoriteMovies": [],
-                "id": "5b9afb97-cdc0-4870-963f-fc382fcb9cac"
+                "favoriteMovies": ["movie_id_1"],
             }
         </pre>
             </td>
@@ -159,16 +160,11 @@
         <!-- Add movie to user's favorite -->
         <tr>
             <td>POST</td>
-            <td>/users/{username}/movies/{movieID}</td>
+            <td>/api/users/{userId}/movies/{movieId}</td>
             <td>POST</td>
             <td>N/A</td>
             <td>
-                An object representing the movie to be added to the user's favorites. The object should contain the
-                following properties:
-                <ul>
-                    <li><code>Name</code>: String (movie name)</li>
-                    <li><code>Description</code>: String (movie description)</li>
-                </ul>
+                N/A (No request body required; the movie ID is extracted from the URL)
             </td>
             <td>
                 A text response indicating that the movie has been added to the user's favorites.
@@ -178,7 +174,7 @@
         <!-- Remove movie from user's favorite -->
         <tr>
             <td>DELETE</td>
-            <td>/users/{username}/movies/{movieID}</td>
+            <td>/api/users/{userId}/movies/{movieId}</td>
             <td>DELETE</td>
             <td>N/A</td>
             <td>N/A</td>
@@ -190,7 +186,7 @@
         <!-- Deregister existing user -->
         <tr>
             <td>DELETE</td>
-            <td>/users/{username}</td>
+            <td>/api/users/{id}</td>
             <td>DELETE</td>
             <td>N/A</td>
             <td>N/A</td>
