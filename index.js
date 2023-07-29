@@ -160,7 +160,7 @@ app.delete('/users/:Username', async (req, res) => {
 
 
 // CREATE movie
-app.post('/users/:id/:movieTitle', async (req, res) => {
+app.post('/users/:id/:movieTitle', passport.authenticate('jwt', { session: false }), async (req, res) => {
   try {
     const { id, movieTitle } = req.params;
 
