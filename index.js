@@ -1,5 +1,5 @@
-const Models = import('./models.js');
-const mongoose = import('mongoose');
+const Models = require('./models.js');
+const mongoose = require('mongoose');
 const Movie = Models.Movie;
 const Users = Models.User;
 const express = require('express');
