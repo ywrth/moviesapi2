@@ -8,7 +8,6 @@ const passport = require('passport'); // Import Passport module
 
 app.use(express.json());
 
-
 // MongoDB connection
 mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -18,10 +17,8 @@ require('./passport');
 // Load the User model
 const Users = Models.User;
 
-// Mount the auth routes
-const authRoutes = require('./auth.js')(app);
-
-
+// AUTH
+let auth = require('./auth')(app);
 
 // Error handling middleware
 const errorHandler = (err, req, res, next) => {
@@ -96,6 +93,67 @@ app.get('/movies/directors/:directorName', passport.authenticate('jwt', { sessio
   }
 });
 
+// Update user info - PUT request
+app.put('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  try {
+    // Check if the authenticated user's username matches the one in the request parameter
+    if (req.user.Username !== req.params.Username) {
+      return res.status(400).send('Permission denied');
+    }
+
+    // Update the user's information
+    const updatedUser = await Users.findOneAndUpdate(
+      { Username: req.params.Username },
+      {
+        $set: {
+          Username: req.body.Username,
+          Password: req.body.Password,
+          Email: req.body.Email,
+          Birthday: req.body.Birthday,
+        },
+      },
+      { new: true }
+    );
+
+    res.json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  }
+});
+
+app.post('/api/users/:userId/movies/:movieId', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  try {
+    // Add the movie ID to the user's favoriteMovies array
+    const user = await Users.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $addToSet: { favoriteMovies: req.params.movieId } }, // Use $addToSet to avoid duplicates
+      { new: true }
+    );
+
+    res.send('Movie added to favorites.');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  }
+});
+
+// Remove movie from user's favorite - DELETE request
+app.delete('/api/users/:userId/movies/:movieId', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  try {
+    // Remove the movie ID from the user's favoriteMovies array
+    const user = await Users.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $pull: { favoriteMovies: req.params.movieId } }, // Use $pull to remove the movie ID from the array
+      { new: true }
+    );
+
+    res.send('Movie removed from favorites.');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  }
+});
 
 
 // Listen for requests

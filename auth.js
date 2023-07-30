@@ -40,7 +40,7 @@ module.exports = (router) => {
     })(req, res);
   });
 
-  // ... (other routes and code)
+
 };
 
 // Function to generate JWT token
