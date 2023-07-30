@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
-const jwtSecret = 'your_jwt_secret'; // Replace with your actual JWT secret key
+const jwtSecret = 'your_jwt_secret'; 
 const bcrypt = require('bcrypt');
 
 // Import the Users model
@@ -12,7 +12,7 @@ module.exports = (router) => {
   // Register a new user
   router.post('/register', async (req, res) => {
     try {
-      const hashedPassword = await bcrypt.hash(req.body.Password, 10); // Hash the password with a salt of 10 rounds
+      const hashedPassword = await bcrypt.hash(req.body.Password, 10); /
       const newUser = new Users({
         Username: req.body.Username,
         Password: hashedPassword,
