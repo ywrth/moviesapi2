@@ -13,7 +13,7 @@ require('./passport');
 
 mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true });
 
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.put('/users/:Username', async (req, res) => {
   // CONDITION TO CHECK ADDED HERE
   if(req.user.Username !== req.params.Username){
       return res.status(400).send('Permission denied');
@@ -49,7 +49,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), as
   Birthday: Date
 }*/
 
-app.post('/users', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.post('/users', async (req, res) => {
   await Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
@@ -78,7 +78,7 @@ app.post('/users', passport.authenticate('jwt', { session: false }), async (req,
 
 // GET ALL USERS + passport!
 
-app.get('/users', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.get('/users', async (req, res) => {
   try {
     const users = await Users.find();
     res.status(200).json(users);
@@ -90,7 +90,7 @@ app.get('/users', passport.authenticate('jwt', { session: false }), async (req, 
 
 // GET A USER BY USERNAME
 
-app.get('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.get('/users/:Username', async (req, res) => {
   await Users.findOne({ Username: req.params.Username })
     .then((user) => {
       res.json(user);
@@ -115,7 +115,7 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), as
   (required)
   Birthday: Date
 }*/
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.put('/users/:Username', async (req, res) => {
   try {
     const updatedUser = await Users.findOneAndUpdate(
       { Username: req.params.Username },
@@ -143,7 +143,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), as
 
 // Add a movie to a user's list of favorites
 
-app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.post('/users/:Username/movies/:MovieID', async (req, res) => {
   try {
     const user = await Users.findOne({ Username: req.params.Username });
     if (!user) {
@@ -165,7 +165,7 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
 });
 
 // Delete a user by username
-app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.delete('/users/:Username', async (req, res) => {
   try {
     const deletedUser = await Users.findOneAndRemove({
       Username: req.params.Username
