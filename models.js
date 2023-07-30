@@ -1,11 +1,25 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-let movieSchema = mongoose.Schema({
-  // Define movie properties here
+// Define the movie schema (You can add movie properties as needed)
+const movieSchema = mongoose.Schema({
+  Title: { type: String, required: true },
+  Description: { type: String, required: true },
+  Genre: {
+    Name: String,
+    Description: String,
+  },
+  Director: {
+    Name: String,
+    Bio: String,
+  },
+  Actors: [String],
+  ImagePath: String,
+  Featured: Boolean,
 });
 
-let userSchema = mongoose.Schema({
+// Define the user schema
+const userSchema = mongoose.Schema({
   Username: { type: String, required: true },
   Password: { type: String, required: true },
   Email: { type: String, required: true },
@@ -22,8 +36,12 @@ userSchema.methods.validatePassword = async function (password) {
   }
 };
 
-let Movie = mongoose.model('Movie', movieSchema);
-let User = mongoose.model('User', userSchema);
+// Create the Movie and User models
+const Movie = mongoose.model('Movie', movieSchema);
+const User = mongoose.model('User', userSchema);
 
-module.exports.Movie = Movie;
-module.exports.User = User;
+// Export the models
+module.exports = {
+  Movie: Movie,
+  User: User,
+};

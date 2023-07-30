@@ -1,37 +1,53 @@
-const jwtSecret = 'your_jwt_secret'; // This has to be the same key used in the JWTStrategy
+const jwt = require('jsonwebtoken');
+const passport = require('passport');
+const jwtSecret = 'your_jwt_secret'; // Replace with your actual JWT secret key
+const bcrypt = require('bcrypt');
 
-const jwt = require('jsonwebtoken'),
-  passport = require('passport');
+// Import the Users model
+const Users = require('./models').User;
 
-require('./passport'); // Your local passport file
-
-
-let generateJWTToken = (user) => {
-  return jwt.sign(user, jwtSecret, {
-    subject: user.Username, // This is the username you’re encoding in the JWT
-    expiresIn: '7d', // This specifies that the token will expire in 7 days
-    algorithm: 'HS256' // This is the algorithm used to “sign” or encode the values of the JWT
-  });
-}
-
-
-/* POST login. */
 module.exports = (router) => {
+  // ... (other routes and code)
+
+  // Register a new user
+  router.post('/register', async (req, res) => {
+    try {
+      const hashedPassword = await bcrypt.hash(req.body.Password, 10); // Hash the password with a salt of 10 rounds
+      const newUser = new Users({
+        Username: req.body.Username,
+        Password: hashedPassword,
+        Email: req.body.Email,
+        Birthday: req.body.Birthday,
+      });
+
+      await newUser.save();
+      res.status(201).json(newUser);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    }
+  });
+
+  // Login
   router.post('/login', (req, res) => {
     passport.authenticate('local', { session: false }, (error, user, info) => {
       if (error || !user) {
-        return res.status(400).json({
-          message: 'Something is not right',
-          user: user
-        });
+        return res.status(401).json({ message: 'Authentication failed. Incorrect username or password.' });
       }
-      req.login(user, { session: false }, (error) => {
-        if (error) {
-          res.send(error);
-        }
-        let token = generateJWTToken(user.toJSON());
-        return res.json({ user, token });
-      });
+      // If authentication is successful, generate and send the JWT token
+      const token = generateJWTToken(user.toJSON());
+      return res.json({ user, token });
     })(req, res);
   });
-}
+
+  // ... (other routes and code)
+};
+
+// Function to generate JWT token
+const generateJWTToken = (user) => {
+  return jwt.sign(user, jwtSecret, {
+    subject: user.Username,
+    expiresIn: '1d', // Token expires in 1 day, you can adjust as needed
+    algorithm: 'HS256',
+  });
+};
