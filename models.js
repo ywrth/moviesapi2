@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-// Define the movie schema (You can add movie properties as needed)
+// Movie schema 
 const movieSchema = mongoose.Schema({
   Title: { type: String, required: true },
   Description: { type: String, required: true },
@@ -18,7 +18,7 @@ const movieSchema = mongoose.Schema({
   Featured: Boolean,
 });
 
-// Define the user schema
+// User schema
 const userSchema = mongoose.Schema({
   Username: { type: String, required: true },
   Password: { type: String, required: true },
