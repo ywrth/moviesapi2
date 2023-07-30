@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const uuid = require('uuid');
-const passport = require('passport'); // Import Passport module
+const passport = require('passport'); 
 
 app.use(express.json());
 
@@ -37,7 +37,7 @@ let requestTime = (req, res, next) => {
 app.use(morgan('combined'));
 app.use(requestTime);
 
-//READ the list of all movies to the users (CRUD)
+//READ the list of all movies
 app.get('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
   try {
     const movies = await Models.Movie.find();
@@ -48,7 +48,7 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), async (req,
   }
 });
 
-//READ the movie by its title
+//GET the movies via title
 app.get('/movies/:title', passport.authenticate('jwt', { session: false }), async (req, res) => {
   try {
     const movie = await Models.Movie.findOne({ Title: req.params.title });
@@ -63,7 +63,7 @@ app.get('/movies/:title', passport.authenticate('jwt', { session: false }), asyn
   }
 });
 
-//READ genre
+//GET genre 
 app.get('/movies/genre/:genreName', passport.authenticate('jwt', { session: false }), async (req, res) => {
   try {
     const movie = await Models.Movie.findOne({ 'Genre.Name': req.params.genreName });
@@ -78,7 +78,7 @@ app.get('/movies/genre/:genreName', passport.authenticate('jwt', { session: fals
   }
 });
 
-//READ director
+//GET director by name
 app.get('/movies/directors/:directorName', passport.authenticate('jwt', { session: false }), async (req, res) => {
   try {
     const movie = await Models.Movie.findOne({ 'Director.Name': req.params.directorName });
@@ -101,7 +101,6 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), as
       return res.status(400).send('Permission denied');
     }
 
-    // Update the user's information
     const updatedUser = await Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
@@ -122,6 +121,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), as
   }
 });
 
+// POST to favorites
 app.post('/api/users/:userId/movies/:movieId', passport.authenticate('jwt', { session: false }), async (req, res) => {
   try {
     // Add the movie ID to the user's favoriteMovies array
@@ -138,7 +138,7 @@ app.post('/api/users/:userId/movies/:movieId', passport.authenticate('jwt', { se
   }
 });
 
-// Remove movie from user's favorite - DELETE request
+// DELETE from favorites
 app.delete('/api/users/:userId/movies/:movieId', passport.authenticate('jwt', { session: false }), async (req, res) => {
   try {
     // Remove the movie ID from the user's favoriteMovies array

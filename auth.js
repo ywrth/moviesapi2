@@ -12,7 +12,7 @@ module.exports = (router) => {
   // Register a new user
   router.post('/register', async (req, res) => {
     try {
-      const hashedPassword = await bcrypt.hash(req.body.Password, 10); /
+      const hashedPassword = await bcrypt.hash(req.body.Password, 10); 
       const newUser = new Users({
         Username: req.body.Username,
         Password: hashedPassword,
