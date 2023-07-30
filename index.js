@@ -121,6 +121,25 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), as
   }
 });
 
+// DELETE request to deregister existing user
+
+app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  try {
+    // Check if the authenticated user's username matches the one in the request parameter
+    if (req.user.Username !== req.params.Username) {
+      return res.status(400).send('Permission denied');
+    }
+
+    // Delete the user
+    await Users.findOneAndRemove({ Username: req.params.Username });
+
+    res.send('User deregistered successfully.');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  }
+});
+
 // POST to favorites
 app.post('/api/users/:userId/movies/:movieId', passport.authenticate('jwt', { session: false }), async (req, res) => {
   try {
