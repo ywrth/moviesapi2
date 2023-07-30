@@ -7,7 +7,7 @@ const app = express();
 const morgan = require('morgan');
 const uuid = require('uuid');
 app.use(express.json());
-let auth = require('./auth')(app);
+let auth = require('./auth.js')(app);
 const passport = require('passport');
 require('./passport');
 
