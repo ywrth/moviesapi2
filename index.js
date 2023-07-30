@@ -327,7 +327,7 @@ app.use(morgan('combined'))
 app.use(requestTime)
 
 app.get('/', (req, res) => {
-  let responseText = 'My absolute favorite movies ever!'
+  let responseText = 'Your absolute favorite movies ever!'
   responseText += '<small>Requested at: ' + req.requestTime + '</small>'
   res.send(responseText)
 })
