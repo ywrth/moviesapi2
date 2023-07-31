@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const uuid = require('uuid');
 const passport = require('passport'); 
 const cors = require('cors'); // import the CORS middleware
-
+const bcrypt = require('bcrypt'); // import bcrypt for password hashing
 
 app.use(express.json());
 
@@ -184,6 +184,35 @@ app.delete('/api/users/:userId/movies/:movieId', passport.authenticate('jwt', { 
     );
 
     res.send('Movie removed from favorites.');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  }
+});
+
+// Create a new user
+app.post('/users', async (req, res) => {
+  try {
+    const { Username, Password, Email, Birthday } = req.body;
+
+    // Check if the requested username already exists
+    const existingUser = await Users.findOne({ Username: Username });
+    if (existingUser) {
+      return res.status(400).send(Username + ' already exists');
+    }
+
+    // Hash the password before saving the user
+    const hashedPassword = await bcrypt.hash(Password, 10);
+
+    // Create the user and save it in the database
+    const newUser = await Users.create({
+      Username: Username,
+      Password: hashedPassword,
+      Email: Email,
+      Birthday: Birthday,
+    });
+
+    res.status(201).json(newUser);
   } catch (error) {
     console.error(error);
     res.status(500).send('Error: ' + error);
