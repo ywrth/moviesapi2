@@ -24,26 +24,28 @@ passport.use(
       passwordField: 'Password',
     },
     async (username, password, callback) => {
-      console.log('Received username:', username);
-      console.log('Received password:', password);
-
-      try {
-        const user = await Users.findOne({ Username: username });
+      console.log(`${username} ${password}`);
+      await Users.findOne({ Username: username })
+      .then((user) => {
         if (!user) {
-          console.log('User not found');
-          return callback(null, false, { message: 'Incorrect username or password.' });
+          console.log('incorrect username');
+          return callback(null, false, {
+            message: 'Incorrect username or password.',
+          });
         }
-        const isValidPassword = await user.validatePassword(password);
-        if (!isValidPassword) {
-          console.log('Incorrect password');
+        if (!user.validatePassword(password)) {
+          console.log('incorrect password');
           return callback(null, false, { message: 'Incorrect password.' });
         }
-        console.log('Authentication successful');
+        console.log('finished');
         return callback(null, user);
-      } catch (error) {
-        console.log('Error:', error);
-        return callback(error);
-      }
+      })
+      .catch((error) => {
+        if (error) {
+          console.log(error);
+          return callback(error);
+        }
+      })
     }
   )
 );
