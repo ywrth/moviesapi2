@@ -7,6 +7,7 @@ const uuid = require('uuid');
 const passport = require('passport'); 
 const cors = require('cors'); // import the CORS middleware
 const bcrypt = require('bcrypt'); // import bcrypt for password hashing
+const { check, validationResult } = require('express-validator');
 
 app.use(express.json());
 
@@ -36,6 +37,8 @@ const Users = Models.User;
 
 // AUTH
 let auth = require('./auth')(app);
+
+
 
 // Error handling middleware
 const errorHandler = (err, req, res, next) => {

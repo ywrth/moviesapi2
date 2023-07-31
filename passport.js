@@ -16,39 +16,30 @@ const jwtOptions = {
   algorithms: ['HS256'],
 };
 
-// LocalStrategy for username/password login
-passport.use(
-  new LocalStrategy(
-    {
-      usernameField: 'Username',
-      passwordField: 'Password',
-    },
-    async (username, password, callback) => {
-      console.log(`${username} ${password}`);
-      await Users.findOne({ Username: username })
-      .then((user) => {
-        if (!user) {
-          console.log('incorrect username');
-          return callback(null, false, {
-            message: 'Incorrect username or password.',
-          });
+/// LocalStrategy for username/password login
+passport.use(new LocalStrategy((username, password, done) => {
+  Models.User.findOne({ Username: username })
+    .then((user) => {
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+
+      // Validate the password by hashing the provided password and comparing it to the stored hashed password
+      bcrypt.compare(password, user.Password, (err, isMatch) => {
+        if (err) {
+          return done(err);
         }
-        if (!user.validatePassword(password)) {
-          console.log('incorrect password');
-          return callback(null, false, { message: 'Incorrect password.' });
+
+        if (!isMatch) {
+          return done(null, false, { message: 'Incorrect password.' });
         }
-        console.log('finished');
-        return callback(null, user);
-      })
-      .catch((error) => {
-        if (error) {
-          console.log(error);
-          return callback(error);
-        }
-      })
-    }
-  )
-);
+
+        // If the username and password are correct, return the user
+        return done(null, user);
+      });
+    })
+    .catch((err) => done(err));
+}));
 
 // JWTStrategy for token-based authentication
 passport.use(
