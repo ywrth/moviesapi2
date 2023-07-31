@@ -17,26 +17,8 @@ require('./passport');
 // Load the User model
 const Users = Models.User;
 
-// CORS
-const cors = require('cors');
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
-
-app.use(cors({
-  origin: (origin, callback) => {
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
-      let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
-      return callback(new Error(message ), false);
-    }
-    return callback(null, true);
-  }
-}));
-
-
 // AUTH
 let auth = require('./auth')(app);
-
-
 
 // Error handling middleware
 const errorHandler = (err, req, res, next) => {
@@ -139,8 +121,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), as
   }
 });
 
-// DELETE request to deregister existing user
-
+// DELETE user 
 app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
   try {
     // Check if the authenticated user's username matches the one in the request parameter
