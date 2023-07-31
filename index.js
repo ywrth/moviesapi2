@@ -5,8 +5,25 @@ const app = express();
 const morgan = require('morgan');
 const uuid = require('uuid');
 const passport = require('passport'); 
+const cors = require('cors'); // import the CORS middleware
+
 
 app.use(express.json());
+
+// CORS
+
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+      return callback(new Error(message), false);
+    }
+    return callback(null, true);
+  }
+}));
 
 // MongoDB connection
 mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true });
