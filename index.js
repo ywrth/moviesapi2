@@ -27,10 +27,10 @@ app.use(cors({
 }));
 
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true }
+mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true },
 
 // Initialize passport and set up passport strategies (local and JWT)
-require('./passport');
+require('./passport'));
 
 // Load the User model
 const Users = Models.User;
