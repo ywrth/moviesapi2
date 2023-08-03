@@ -27,6 +27,7 @@ app.use(cors({
 }));
 
 // MongoDB connection
+mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true }
 
 // Initialize passport and set up passport strategies (local and JWT)
 require('./passport');
