@@ -317,4 +317,15 @@ db.users.updateOne(
         };
         
         db.users.insertOne(user5);
-    
+  
+
+        mongoimport --uri mongodb+srv://HotPotatoesAdmin:Admin1234@hotpotatoes.btu6v8q.mongodb.net/HotPotatoes --collection movies --type json --file /Users/ywrth/movies.movies.json
+
+        //Users/ywrth/Desktop/movies.movies.json
+
+        mongoexport --uri mongodb+srv://HotPotatoesAdmin:Admin1234@hotpotatoes.btu6v8q.mongodb.net/HotPotatoes --collection movies --type json> --out /Users/ywrth/movies.movies.json
+
+        mongoimport --uri mongodb+srv://HotPotatoesAdmin:Admin1234@hotpotatoes.btu6v8q.mongodb.net/HotPotatoes --collection movies --type json --file /Users/ywrth/movies.users.json;
+
+
+

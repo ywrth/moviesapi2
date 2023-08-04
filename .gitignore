@@ -4,3 +4,6 @@ node_modules/
 -notes/users-test.js
 package-lock.json
 movies.json
+-notes/users-test.js
+movies.movies.json
+movies.users.json
