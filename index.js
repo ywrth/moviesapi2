@@ -26,7 +26,7 @@ app.use(cors({
   }
 }));
 
-// MongoDB connection
+
 //mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true },
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -225,8 +225,7 @@ app.post('/users',
           //If the user is found, send a response that it already exists
           return res.status(400).send(req.body.Username + ' already exists');
         } else {
-          Users
-            .create({
+          Models.User.create({
               Username: req.body.Username,
               Password: hashedPassword,
               Email: req.body.Email,
