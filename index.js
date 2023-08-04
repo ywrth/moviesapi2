@@ -58,6 +58,10 @@ let requestTime = (req, res, next) => {
 app.use(morgan('combined'));
 app.use(requestTime);
 
+app.get('/', (req, res) => {
+  res.send('Welcome to HOT POTATOES');
+});
+
 //READ the list of all movies
 app.get('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
   try {
