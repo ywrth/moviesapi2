@@ -245,25 +245,6 @@ app.post('/users',
       });
   });
 
-  // error catching handler - connection issues
-  mongoose.connect(
-    process.env.CONNECTT_URI,
-    options,
-    (err) => {
-     if(err) console.log(err) 
-     else console.log("mongdb is connected");
-    }
-  );
-  
-  // or
-  
-  mongoose.connect(
-    process.env.CONNECTT_URI,
-    options
-  )
-  .then(()=>console.log('connected'))
-  .catch(e=>console.log(e));
-
 // Listen for requests
 const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0',() => {
