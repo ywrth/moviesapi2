@@ -1,0 +1,161 @@
+[{
+  "_id": {
+    "$oid": "64c34a3d7d75f984a94efc8e"
+  },
+  "Name": "Johanne Larsen",
+  "Username": "jbl.heart",
+  "Password": "ohiboka1",
+  "Email": "jbl@gmail.com",
+  "Birthday": "1991-07-09",
+  "FavoriteMovies": [
+    {
+      "$oid": "64be39f0f7ee369bfd2b4af8"
+    },
+    {
+      "$oid": "64be39f9f7ee369bfd2b4af9"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "64c65a1c6c99db5d8b8b47a1"
+  },
+  "Username": "john.dope",
+  "Password": "$2b$10$0rES5YW2sWbybiq6gPbu7eRUPEdMIqgZ6HVSOPU83BVugriZLTtSS",
+  "Email": "john.poe@gmail.com",
+  "Birthday": {
+    "$date": "1989-05-12T00:00:00.000Z"
+  },
+  "FavoriteMovies": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64c34a9d7d75f984a94efc8f"
+  },
+  "Name": "John Poe",
+  "Username": "john.dope",
+  "Password": "test456",
+  "Email": "john.poe@gmail.com",
+  "Birthday": "1989-05-12",
+  "FavoriteMovies": [
+    {
+      "$oid": "64be3903f7ee369bfd2b4af2"
+    },
+    {
+      "$oid": "64be39aef7ee369bfd2b4af3"
+    },
+    {
+      "$oid": "64be39e8f7ee369bfd2b4af7"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "64c64882ac0e79341822dcf3"
+  },
+  "Username": "meymey2",
+  "Password": "NewPassword123",
+  "Email": "may-lou-updated@gmx.de",
+  "Birthday": {
+    "$date": "2003-04-10T00:00:00.000Z"
+  },
+  "FavoriteMovies": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64c765bee2113de28da3d950"
+  },
+  "Username": "john.dope",
+  "Password": "$2b$10$pb17FpyetM6XdEaLnE6NwOHYgzmaQrgBpcMq4Lu1pxhUpXPVqcJHa",
+  "Email": "john.poe@gmail.com",
+  "Birthday": {
+    "$date": "1989-05-12T00:00:00.000Z"
+  },
+  "FavoriteMovies": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64c349d27d75f984a94efc8d"
+  },
+  "Name": "Marco Deutschland",
+  "Username": "m-d-m",
+  "Password": "passssss1111",
+  "Email": "angel.p@gmail.com",
+  "Birthday": "1999-01-12",
+  "FavoriteMovies": [
+    {
+      "$oid": "64be3a0ef7ee369bfd2b4afb"
+    },
+    {
+      "$oid": "64be39f0f7ee369bfd2b4af8"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "64c659e46c99db5d8b8b479b"
+  },
+  "Username": "john.dope",
+  "Password": "$2b$10$NotCCBiE3GcPb.ta8ZNn5uQLZiwe7z5iWibcOIO1ZbO0BHRHI0QJu",
+  "Email": "john.poe@gmail.com",
+  "Birthday": {
+    "$date": "1989-05-12T00:00:00.000Z"
+  },
+  "FavoriteMovies": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64c347787d75f984a94efc8b"
+  },
+  "Name": "Maria Suarez",
+  "Username": "m.suarez",
+  "Password": "test123",
+  "Email": "m.suarez@gmail.com",
+  "Birthday": "09/10/1990",
+  "FavoriteMovies": [
+    {
+      "$oid": "64be3a0ef7ee369bfd2b4afb"
+    },
+    {
+      "$oid": "64be3a04f7ee369bfd2b4afa"
+    },
+    {
+      "$oid": "64be39f0f7ee369bfd2b4af8"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "64c63ec3e5d97c508c238a19"
+  },
+  "Username": "michaelangelo",
+  "Password": "$2b$10$bBs.9fF7X8jL7NUY4MEwwuvMW/x4rxqXOvnJXTvLDWeg.KXPWhkwm",
+  "Email": "michaelangelobbb@gmx.de",
+  "Birthday": {
+    "$date": "1990-01-02T00:00:00.000Z"
+  },
+  "FavoriteMovies": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64c348177d75f984a94efc8c"
+  },
+  "Name": "Angelo Priest",
+  "Username": "aprie",
+  "Password": "logmein23",
+  "Email": "angel.p@gmail.com",
+  "Birthday": "1999-01-12",
+  "FavoriteMovies": [
+    {
+      "$oid": "64be3a0ef7ee369bfd2b4afb"
+    },
+    {
+      "$oid": "64be39f0f7ee369bfd2b4af8"
+    }
+  ]
+}]
