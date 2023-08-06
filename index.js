@@ -29,7 +29,7 @@ app.use(cors({
 
 //mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true },
 
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.CONNECTT_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Initialize passport and set up passport strategies (local and JWT)
 require('./passport');
@@ -244,6 +244,25 @@ app.post('/users',
         res.status(500).send('Error: ' + error);
       });
   });
+
+  // error catching handler - connection issues
+  mongoose.connect(
+    process.env.CONNECTT_URI,
+    options,
+    (err) => {
+     if(err) console.log(err) 
+     else console.log("mongdb is connected");
+    }
+  );
+  
+  // or
+  
+  mongoose.connect(
+    process.env.CONNECTT_URI,
+    options
+  )
+  .then(()=>console.log('connected'))
+  .catch(e=>console.log(e));
 
 // Listen for requests
 const port = process.env.PORT || 8080;
