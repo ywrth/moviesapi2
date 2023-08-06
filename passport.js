@@ -16,30 +16,28 @@ const jwtOptions = {
   algorithms: ['HS256'],
 };
 
-/// LocalStrategy for username/password login
-passport.use(new LocalStrategy((username, password, done) => {
-  Models.User.findOne({ Username: username })
-    .then((user) => {
+// LocalStrategy for username/password login
+passport.use(
+  new LocalStrategy(async (username, password, done) => {
+    try {
+      const user = await Users.findOne({ Username: username });
+
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
       }
 
-      // Validate the password by hashing the provided password and comparing it to the stored hashed password
-      bcrypt.compare(password, user.Password, (err, isMatch) => {
-        if (err) {
-          return done(err);
-        }
+      const isMatch = await bcrypt.compare(password, user.Password);
 
-        if (!isMatch) {
-          return done(null, false, { message: 'Incorrect password.' });
-        }
+      if (!isMatch) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
 
-        // If the username and password are correct, return the user
-        return done(null, user);
-      });
-    })
-    .catch((err) => done(err));
-}));
+      return done(null, user);
+    } catch (err) {
+      return done(err);
+    }
+  })
+);
 
 // JWTStrategy for token-based authentication
 passport.use(
@@ -55,3 +53,5 @@ passport.use(
     }
   })
 );
+
+module.exports = passport;
