@@ -28,6 +28,7 @@ app.use(cors({
 
 
 //mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true },
+<<<<<<< HEAD
 mongoose 
  .connect(process.env.CONNECTION_URI, {
   useNewURLParser: true,
@@ -37,6 +38,10 @@ mongoose
 
 .then(console.log("connected to server"))
 .catch((err) => console.log(err));
+=======
+
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+>>>>>>> parent of 71ad474 (database connection fix)
 
 // Initialize passport and set up passport strategies (local and JWT)
 require('./passport');
