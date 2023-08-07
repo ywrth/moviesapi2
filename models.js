@@ -19,7 +19,7 @@ const movieSchema = mongoose.Schema({
 });
 
 // User schema
-const userSchema = mongoose.Schema({
+let userSchema = mongoose.Schema({
   Username: { type: String, required: true },
   Password: { type: String, required: true },
   Email: { type: String, required: true },
@@ -31,21 +31,15 @@ userSchema.statics.hashPassword = function (password) {
   return bcrypt.hashSync(password, 10);
 };
 
-// Define validatePassword method for the User model
-userSchema.methods.validatePassword = async function (password) {
-  try {
-    return await bcrypt.compare(password, this.Password);
-  } catch (error) {
-    throw new Error(error);
-  }
+userSchema.methods.validatePassword = function (password) {
+  return bcrypt.compareSync(password, this.Password);
 };
+
 
 // Create the Movie and User models
-const Movie = mongoose.model('Movie', movieSchema);
-const User = mongoose.model('User', userSchema);
+let Movie = mongoose.model('Movie', movieSchema);
+let User = mongoose.model('User', userSchema);
 
 // Export the models
-module.exports = {
-  Movie: Movie,
-  User: User,
-};
+module.exports.Movie = Movie;
+module.exports.User = User;
