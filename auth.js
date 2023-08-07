@@ -12,8 +12,7 @@ module.exports = (router) => {
   // Register a new user
   router.post('/register', async (req, res) => {
     try {
-      const salt = await bcrypt.genSalt(10); // Generate a salt
-      const hashedPassword = await bcrypt.hash(req.body.Password, salt); // Hash the password with the salt
+      const hashedPassword = await bcrypt.hash(req.body.Password, 10); 
       const newUser = new Users({
         Username: req.body.Username,
         Password: hashedPassword,
@@ -28,8 +27,6 @@ module.exports = (router) => {
       res.status(500).send('Error: ' + error);
     }
   });
-
-  
 
   // Login
   router.post('/login', (req, res) => {
