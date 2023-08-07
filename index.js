@@ -14,6 +14,10 @@ const Movies = Models.Movie;
 const User = Models.User;
 
 app.use(express.json());
+app.use(express.json());
+app.use(morgan('common'));
+app.use(express.static('public'));
+app.use(bodyParser.json());
 
 //CONNECT
 //mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true },
@@ -48,39 +52,6 @@ app.use(cors({
     return callback(null, true);
   }
 }));
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
-//mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true },
-mongoose 
- .connect(process.env.CONNECTION_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true,   })   
- .then(() => console.log("Database connected!"))
- .catch(err => console.log(err));
-
-// Initialize passport and set up passport strategies (local and JWT)
-require('./passport');
-
-// Load the User model
-const Users = Models.User;
-
-// AUTH
-let auth = require('./auth')(app);
-=======
-=======
-
->>>>>>> main
-app.use(express.json());
-app.use(morgan('common'));
-app.use(express.static('public'));
-app.use(bodyParser.json());
->>>>>>> main
-
-
-
 
 //WELCOME
 app.get('/', (req, res) => {
