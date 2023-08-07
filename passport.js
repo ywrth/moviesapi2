@@ -43,7 +43,7 @@ passport.use(
     }
   )
 );
-// JWTStrategy for token-based authentication
+// JWTStrategy 
 passport.use(
   new JwtStrategy(
     {

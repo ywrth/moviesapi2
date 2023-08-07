@@ -3,7 +3,6 @@ const passport = require('passport');
 const jwtSecret = 'mysecret'; 
 const bcrypt = require('bcrypt');
 
-require('./passport');
 
 // Function to generate JWT token
 const generateJWTToken = (user) => {
@@ -14,7 +13,7 @@ const generateJWTToken = (user) => {
   });
 };
 
-  // Login
+  // Login module
   module.exports = (router) => {
     router.post('/login', (req, res) => {
       passport.authenticate('local', { session: false }, (error, user, info) => {
