@@ -7,36 +7,26 @@ const bodyParser = require('body-parser');
 const uuid = require('uuid');
 const passport = require('passport');
 const cors = require('cors'); // import the CORS middleware
+const bcrypt = require('bcrypt'); // import bcrypt for password hashing
 const { check, validationResult } = require('express-validator');
 
 const Movies = Models.Movie;
 const User = Models.User;
 
 app.use(express.json());
-app.use(express.json());
-app.use(morgan('common'));
-app.use(express.static('public'));
-app.use(bodyParser.json());
 
 //CONNECT
 //mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true },
 mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-})
-  .then(() => {
-    const port = process.env.PORT || 8080;
-    app.listen(port, '0.0.0.0', () => {
-      console.log('Listening on Port ' + port);
-    });
-  })
-  .catch((error) => {
-    console.error('Error connecting to the database:', error);
-  });
+});
+
+
 
 
 // Initialize passport and set up passport strategies (local and JWT)
-let auth = require('./auth.js')(app);
+let auth = require('./auth')(app);
 
 
 
@@ -51,11 +41,12 @@ app.use(cors({
     return callback(null, true);
   }
 }));
-
 app.use(express.json());
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
+
+
 
 
 //WELCOME
