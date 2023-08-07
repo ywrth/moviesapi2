@@ -4,46 +4,57 @@ const jwtSecret = 'your_jwt_secret';
 const bcrypt = require('bcrypt');
 
 // Import the Users model
-const Users = require('./models').User;
+const User = require('./models').User;
 
 module.exports = (router) => {
   // ... (other routes and code)
 
-  // Register a new user
-  router.post('/register', async (req, res) => {
-    try {
-      const salt = await bcrypt.genSalt(10); // Generate a salt
-      const hashedPassword = await bcrypt.hash(req.body.Password, salt); // Hash the password with the salt
-      const newUser = new Users({
-        Username: req.body.Username,
-        Password: hashedPassword,
-        Email: req.body.Email,
-        Birthday: req.body.Birthday,
+   // Register a new user
+   router.post('/register', async (req, res) => {
+    User.findOne({ email: req.body.email }).exec((error, user) => {
+      if (user) {
+        return res.status(400).json({
+          message: 'User already exists.',
+        });
+      }
+
+      const { Username, Password, Email } = req.body;
+      const hashedPassword = bcrypt.hashSync(Password, 10);
+
+      const _user = new User({
+        Username,
+        Password: hashedPassword, // Changed hashedPassword to Password
+        email: Email, // Changed email to Email
       });
 
-      await newUser.save();
-      res.status(201).json(newUser);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Error: ' + error);
-    }
+      _user.save((error, data) => {
+        if (error) {
+          return res.status(400).json({
+            message: 'Something went wrong',
+          });
+        }
+        if (data) {
+          return res.status(201).json({
+            user: data,
+          });
+        }
+      });
+    });
   });
 
-  
-
-  // Login
-  router.post('/login', (req, res) => {
+   // Login
+   router.post('/login', (req, res) => {
     passport.authenticate('local', { session: false }, (error, user, info) => {
       if (error || !user) {
-        return res.status(401).json({ message: 'Authentication failed. Incorrect username or password.' });
+        return res
+          .status(401)
+          .json({ message: 'Authentication failed. Incorrect username or password.' });
       }
       // If authentication is successful, generate and send the JWT token
       const token = generateJWTToken(user.toJSON());
       return res.json({ user, token });
     })(req, res);
   });
-
-
 };
 
 // Function to generate JWT token
