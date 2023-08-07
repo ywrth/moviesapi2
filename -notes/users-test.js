@@ -329,22 +329,3 @@ db.users.updateOne(
 
 
 
-  // Register a new user
-  router.post('/register', async (req, res) => {
-    try {
-      const salt = await bcrypt.genSalt(10); // Generate a salt
-      const hashedPassword = await bcrypt.hash(req.body.Password, salt); // Hash the password with the salt
-      const newUser = new Users({
-        Username: req.body.Username,
-        Password: hashedPassword,
-        Email: req.body.Email,
-        Birthday: req.body.Birthday,
-      });
-
-      await newUser.save();
-      res.status(201).json(newUser);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Error: ' + error);
-    }
-  });
