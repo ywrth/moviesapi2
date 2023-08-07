@@ -55,8 +55,6 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 
 
-
-
 //WELCOME
 app.get('/', (req, res) => {
   res.send('Welcome to HOT POTATOES');
