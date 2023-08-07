@@ -7,7 +7,6 @@ const bodyParser = require('body-parser');
 const uuid = require('uuid');
 const passport = require('passport');
 const cors = require('cors'); // import the CORS middleware
-const bcrypt = require('bcrypt'); // import bcrypt for password hashing
 const { check, validationResult } = require('express-validator');
 
 const Movies = Models.Movie;
