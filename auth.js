@@ -1,27 +1,26 @@
 const jwt = require('jsonwebtoken');
 const jwtSecret = 'mysecret'; 
 const passport = require('passport');
-const bcrypt = require('bcrypt');
 
-const app = require('./index.js');
+require('./passport');
 
 // Function to generate JWT token
-const generateJWTToken = (user) => {
+let generateJWTToken = (user) => {
   return jwt.sign(user, jwtSecret, {
     subject: user.Username,
-    expiresIn: '1d', // Token expires in 1 day, you can adjust as needed
+    expiresIn: '7d',
     algorithm: 'HS256',
   });
 };
 
   // Login module
   module.exports = (router) => {
-    app.post('/login', (req, res, next) => {
-      passport.authenticate('local', { session: false }, (err, user, info) => {
+    router.post('/login', (req, res) => {
+      passport.authenticate('local', { session: false }, (error, user, info) => {
         console.log(user);
         if (error || !user) {
           return res.status(400).json({
-            message: 'Something went wrong',
+            message: 'Houston, we have a problem!',
             user,
           });
         }
