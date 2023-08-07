@@ -20,9 +20,16 @@ app.use(express.json());
 mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
-
-
+})
+  .then(() => {
+    const port = process.env.PORT || 8080;
+    app.listen(port, '0.0.0.0', () => {
+      console.log('Listening on Port ' + port);
+    });
+  })
+  .catch((error) => {
+    console.error('Error connecting to the database:', error);
+  });
 
 
 // Initialize passport and set up passport strategies (local and JWT)
@@ -41,6 +48,7 @@ app.use(cors({
     return callback(null, true);
   }
 }));
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -62,6 +70,9 @@ const Users = Models.User;
 // AUTH
 let auth = require('./auth')(app);
 =======
+=======
+
+>>>>>>> main
 app.use(express.json());
 app.use(morgan('common'));
 app.use(express.static('public'));
