@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const jwtSecret = 'mysecret'; 
+const passport = require('passport');
 const bcrypt = require('bcrypt');
 
 
