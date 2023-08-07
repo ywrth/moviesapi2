@@ -11,35 +11,22 @@ module.exports = (router) => {
 
   // Register a new user
   router.post('/register', async (req, res) => {
-    User.findOne({ Email: req.body.Email }).exec((error, user) => {
-      if (user) {
-        return res.status(400).json({
-          message: 'User already exists.',
-        });
-      }
-
-      const { Username, Password, Email } = req.body;
-      const hashedPassword = User.hashPassword(Password); // Use the static method here
-
-      const _user = new User({
-        Username,
+    try {
+      const salt = await bcrypt.genSalt(10); // Generate a salt
+      const hashedPassword = await bcrypt.hash(req.body.Password, salt); // Hash the password with the salt
+      const newUser = new Users({
+        Username: req.body.Username,
         Password: hashedPassword,
-        Email,
+        Email: req.body.Email,
+        Birthday: req.body.Birthday,
       });
 
-      _user.save((error, data) => {
-        if (error) {
-          return res.status(400).json({
-            message: 'Something went wrong',
-          });
-        }
-        if (data) {
-          return res.status(201).json({
-            user: data,
-          });
-        }
-      });
-    });
+      await newUser.save();
+      res.status(201).json(newUser);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    }
   });
 
   
