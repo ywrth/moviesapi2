@@ -8,7 +8,7 @@ const cors = require('cors');
 const { check, validationResult } = require('express-validator');
 
 const Movies = Models.Movie;
-const User = Models.User;
+const Users = Models.User;
 
 //CONNECT
 //mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true },
