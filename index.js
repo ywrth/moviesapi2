@@ -1,19 +1,14 @@
-const Models = require('./models.js');
-const mongoose = require('mongoose');
 const express = require('express');
-const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const uuid = require('uuid');
-const passport = require('passport');
-const cors = require('cors'); // import the CORS middleware
-const bcrypt = require('bcrypt'); // import bcrypt for password hashing
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+const cors = require('cors'); 
 const { check, validationResult } = require('express-validator');
 
 const Movies = Models.Movie;
 const User = Models.User;
-
-app.use(express.json());
 
 //CONNECT
 //mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true },
@@ -22,12 +17,18 @@ mongoose.connect(process.env.CONNECTION_URI, {
   useUnifiedTopology: true,
 });
 
+const app = express();
 
+app.use(express.json());
+app.use(morgan('common'));
+app.use(express.static('public'));
+app.use(bodyParser.json());
 
 
 // Initialize passport and set up passport strategies (local and JWT)
 let auth = require('./auth')(app);
-
+const passport = require('passport');
+require('./passport');
 
 
 // CORS
@@ -41,13 +42,6 @@ app.use(cors({
     return callback(null, true);
   }
 }));
-app.use(express.json());
-app.use(morgan('common'));
-app.use(express.static('public'));
-app.use(bodyParser.json());
-
-
-
 
 //WELCOME
 app.get('/', (req, res) => {
