@@ -30,13 +30,11 @@ app.use(cors({
 //mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true },
 mongoose 
  .connect(process.env.CONNECTION_URI, {
-  useNewURLParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-},6000000)
-
-.then(console.log("connected to server"))
-.catch((err) => console.log(err));
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,   })   
+ .then(() => console.log("Database connected!"))
+ .catch(err => console.log(err));
 
 // Initialize passport and set up passport strategies (local and JWT)
 require('./passport');
