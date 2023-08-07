@@ -37,7 +37,7 @@ mongoose.connect(process.env.CONNECTION_URI, {
 
 
 // Initialize passport and set up passport strategies (local and JWT)
-let auth = require('./auth')(app);
+let auth = require('./auth.js')(app);
 
 
 

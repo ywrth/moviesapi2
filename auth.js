@@ -3,6 +3,7 @@ const jwtSecret = 'mysecret';
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 
+const app = require('./index.js');
 
 // Function to generate JWT token
 const generateJWTToken = (user) => {
