@@ -18,15 +18,36 @@
 
     <h2>API Endpoints</h2>
 
-    <table>
-        <tr>
-            <th>Request</th>
-            <th>URL</th>
-            <th>Method</th>
-            <th>Query Parameters</th>
-            <th>Request Body</th>
-            <th>Response Data</th>
-        </tr>
+<h3>Authentication</h3>
+
+<h4>Login</h4>
+<p>Authenticate a user and receive a JWT token.</p>
+<table>
+    <tr>
+        <th>URL</th>
+        <th>Method</th>
+        <th>Request Body</th>
+        <th>Response</th>
+    </tr>
+    <tr>
+        <td>/login</td>
+        <td>POST</td>
+        <td>
+            <code>Username</code>: String (required)<br>
+            <code>Password</code>: String (required)
+        </td>
+        <td>
+            <p>If successful:</p>
+            <p>Status Code: 200</p>
+            <p>Response Body: JSON object containing user data and JWT token</p>
+            <p>If authentication fails:</p>
+            <p>Status Code: 400</p>
+            <p>Response Body: JSON object with an error message</p>
+        </td>
+    </tr>
+</table>
+
+<h3>Movies</h3>
 
         <!-- request all movies -->
         <tr>
@@ -105,6 +126,7 @@
             </td>
         </tr>
 
+        <h3>Users</h3>
         <!-- Register new user -->
         <tr>
             <td>POST</td>
@@ -194,6 +216,14 @@
                 A text response indicating that the user has been deregistered.
             </td>
         </tr>
+
+        <h2>Important Note</h2>
+
+    <p>All requests to routes that require JWT authentication should include the JWT token in the
+        <code>Authorization</code> header as <code>Bearer &lt;token&gt;</code>.</p>
+</body>
+
+</html>
     </table>
 </body>
 
