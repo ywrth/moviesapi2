@@ -32,6 +32,7 @@ require('./passport');
 
 
 // CORS
+const allowedOrigins = ['https://hotpotatoes.onrender.com']; // Replace with your frontend's URL
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
