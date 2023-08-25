@@ -39,6 +39,9 @@ app.use(cors({
   credentials: true,
 }));
 
+// Add this line for handling OPTIONS requests
+app.options('*', cors());
+
 //WELCOME
 app.get('/', (req, res) => {
   res.send('Welcome to HOT POTATOES');
