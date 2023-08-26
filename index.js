@@ -32,7 +32,6 @@ require('./passport');
 
 
 // CORS
-const allowedOrigins = ['http://localhost:1234']; 
 app.use(cors());
 
 
