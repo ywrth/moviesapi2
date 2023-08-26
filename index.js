@@ -29,8 +29,6 @@ const passport = require('passport');
 require('./passport');
 
 
-// CORS
-
 
 
 //WELCOME
