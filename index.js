@@ -32,14 +32,7 @@ require('./passport');
 
 
 // CORS
-app.use(cors());
 
-const corsOptions = {
-  origin: 'http://localhost:1234', // Replace with the actual URL of your frontend
-  optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
-};
-
-app.use(cors(corsOptions));
 
 
 //WELCOME
