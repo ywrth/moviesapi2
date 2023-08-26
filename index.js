@@ -31,9 +31,9 @@ require('./passport');
 
 
 
-//WELCOME
+//WELCOMEE
 app.get('/', (req, res) => {
-  res.send('Welcome to HOT POTATOES');
+  res.send('Welcome to HOT POTATOES!!!');
 });
 
 
