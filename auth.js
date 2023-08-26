@@ -4,7 +4,7 @@ const passport = require('passport');
 
 require('./passport');
 
-// Function to generate JWT token
+// Function to generate JWT token for authentication
 let generateJWTToken = (user) => {
   return jwt.sign(user, jwtSecret, {
     subject: user.Username,
