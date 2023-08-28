@@ -37,10 +37,10 @@ const allowedOrigins = ['http://localhost:1234'];
 app.use(cors({
   origin: allowedOrigins,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  headers: { "Content-Type": "application/json", },
+  headers: { "aContent-Type": "application/json", },
   credentials: true,
 }));
-app.use(cors());
+//app.use(cors());
 
 //WELCOME
 app.get('/', (req, res) => {
