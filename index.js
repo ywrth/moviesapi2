@@ -4,11 +4,13 @@ const bodyParser = require('body-parser');
 const uuid = require('uuid');
 const mongoose = require('mongoose');
 const Models = require('./models.js');
+const cors = require('cors'); 
 const { check, validationResult } = require('express-validator');
 
 const Movies = Models.Movie;
 const Users = Models.User;
 
+//CONNECT
 //mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true },
 mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
@@ -29,11 +31,20 @@ const passport = require('passport');
 require('./passport');
 
 
+// CORS
+// CORS
+const allowedOrigins = ['http://localhost:1234']; 
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  headers: { "Content-Type": "application/json", },
+  credentials: true,
+}));
+app.use(cors());
 
-
-//WELCOMEE
+//WELCOME
 app.get('/', (req, res) => {
-  res.send('Welcome to HOT POTATOES!!!');
+  res.send('Welcome to HOT POTATOES');
 });
 
 
