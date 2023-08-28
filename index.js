@@ -19,10 +19,11 @@ mongoose.connect(process.env.CONNECTION_URI, {
 
 const app = express();
 
-app.use(express.json());
+//app.use(express.json());
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 
 // Initialize passport and set up passport strategies (local and JWT)
@@ -33,14 +34,14 @@ require('./passport');
 
 // CORS
 // CORS
-const allowedOrigins = ['http://localhost:1234']; 
-app.use(cors({
+const allowedOrigins = ['*']; 
+/*app.use(cors({
   origin: allowedOrigins,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   headers: { "Content-Type": "application/json", },
   credentials: true,
-}));
-//app.use(cors());
+}));*/
+app.use(cors());
 
 //WELCOME
 app.get('/', (req, res) => {
