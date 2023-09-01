@@ -11,7 +11,7 @@ const Movies = Models.Movie;
 const Users = Models.User;
 
 //CONNECT
-//mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true },
+//mongoose.connect('', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -27,20 +27,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 // Initialize passport and set up passport strategies (local and JWT)
-let auth = require('./auth')(app);
+require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
-
-// CORS
-// CORS
-const allowedOrigins = ['*']; 
-/*app.use(cors({
-  origin: allowedOrigins,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  headers: { "Content-Type": "application/json", },
-  credentials: true,
-}));*/
 app.use(cors());
 
 //WELCOME
