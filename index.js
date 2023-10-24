@@ -219,6 +219,43 @@ app.put(
   }
 );
 
+// Get a user's favorite movies
+app.get(
+  "/users/:Username/favoriteMovies",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Users.findOne({ Username: req.params.Username })
+      .then((user) => {
+        if (!user) {
+          return res.status(400).send(`User ${req.params.Username} not found.`);
+        }
+
+        // Get the array of favorite movie IDs from the user object
+        const favoriteMoviesIDs = user.FavoriteMovies;
+
+        // Find all movies whose IDs are in the favoriteMoviesIDs array
+        Movies.find({
+          _id: { $in: favoriteMoviesIDs },
+        })
+          .then((movies) => {
+            if (!movies) {
+              return res.status(400).send("No favorite movies found.");
+            }
+
+            res.status(200).json(movies);
+          })
+          .catch((error) => {
+            console.error(error);
+            res.status(500).send("Error: " + error);
+          });
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send("Error: " + error);
+      });
+  }
+);
+
 // Add a movie to user's favorites
 app.post(
   "/users/:Username/movies/:MovieID",
