@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // CORS setup
 const corsOptions = {
-  origin: "http://localhost:4200",
+  origin: "https://ywrth.github.io",
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
