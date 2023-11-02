@@ -75,7 +75,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
  * @const
  */
 const corsOptions = {
-  origin: "https://ywrth.github.io",
+  origin: ["https://ywrth.github.io", "https://hot-potatoes.netlify.app"], // Add your client's URL here
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
