@@ -1,3 +1,10 @@
+/**
+ * @fileOverview Main server file for the HOT POTATOES application.
+ * @author Ywrth
+ * @version 1.0.0
+ * @module myFlix
+ */
+
 // ==========================
 // IMPORTS AND CONFIGURATIONS
 // ==========================
